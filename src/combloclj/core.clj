@@ -1,11 +1,6 @@
 (ns combloclj.core
   (:require [clojure.string :as str]))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
-
 (defn parse-clcode
   "CLCodeを解析し、nodeのリストとして返却する"
   [clcode]
