@@ -1,6 +1,6 @@
-(ns combloclj.core-test
+(ns comblo.core-test
   (:require [clojure.test :refer :all]
-            [combloclj.core :refer :all]))
+            [comblo.core :refer :all]))
 
 (def cs [
         {:combinator "S" :args-count 3 :format "{0}{2}({1}{2})"}

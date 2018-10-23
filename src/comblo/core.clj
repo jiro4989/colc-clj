@@ -1,4 +1,4 @@
-(ns combloclj.core
+(ns comblo.core
   (:require [clojure.string :as str]))
 
 (defn get-prefix-bracket-combinator
