@@ -4,9 +4,9 @@
 (defn get-prefix-bracket-combinator
   "先頭の、括弧でくくられた文字列を返す"
   [text]
-  (loop [t text
-         i 0
-         depth 0]
+  (loop [^String t text
+         i (int 0)
+         depth (int 0)]
     (cond
       (empty? t) nil
       (< depth 0) nil
@@ -26,7 +26,8 @@
 
 (defn get-prefix-combinator
   "先頭のコンビネータを取得する"
-  [clcode combinators]
+  [^String clcode
+   combinators]
   (let [m (filter #(str/starts-with? clcode %) combinators)]
     (if (not (= (count m) 0))
       (first m)
@@ -37,7 +38,7 @@
 (defn parse-combinators
   "CLCodeをコンビネータのリストに変換する"
   [clcode combinators]
-  (loop [c clcode
+  (loop [^String c clcode
          ret []]
     (if (empty? c)
       ret
@@ -50,7 +51,8 @@
 
 (defn calc-clcode
   "CLCodeを計算する"
-  [clcode combinators]
+  [^String clcode
+   combinators]
   (let [m (filter #(str/starts-with? clcode %)
                   (map :combinator combinators))]
     (if (not (= (count m) 0))
