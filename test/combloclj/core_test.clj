@@ -17,5 +17,7 @@
     (is (= "S" (get-prefix-combinator "Sxyz" ["S" "K" "I"])))
     (is (= "(ABC)" (get-prefix-combinator "(ABC)XYZ" ["S" "K" "I"])))
     (is (= "Z" (get-prefix-combinator "Zxyz" ["S" "K" "I"])))
+    (is (= "Z" (get-prefix-combinator "Zxyz" [])))
+    (is (= "Abc" (get-prefix-combinator "Abcxyz" ["Abc"])))
     ))
 
