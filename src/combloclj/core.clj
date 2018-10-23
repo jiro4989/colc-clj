@@ -39,6 +39,11 @@
         (get-prefix-bracket-combinator clcode)
         (-> clcode first str)))))
 
+(defn calc-clcode
+  "CLCodeを計算する"
+  [clcode combinators]
+  "xz(yz)")
+
 (defn -main
   "main func"
   []

@@ -2,7 +2,7 @@
   (:require [clojure.test :refer :all]
             [combloclj.core :refer :all]))
 
-(deftest get-prefix-bracket-combinator-test
+(deftest test-get-prefix-bracket-combinator
   (testing "正常系"
     (is (= "(abc)" (get-prefix-bracket-combinator "(abc)xyz")))
     (is (= "(abc)" (get-prefix-bracket-combinator "(abc)")))
@@ -12,7 +12,7 @@
     (is (= "()" (get-prefix-bracket-combinator "()")))
     ))
 
-(deftest get-prefix-combinator-test
+(deftest test-get-prefix-combinator
   (testing "正常系"
     (is (= "S" (get-prefix-combinator "Sxyz" ["S" "K" "I"])))
     (is (= "(ABC)" (get-prefix-combinator "(ABC)XYZ" ["S" "K" "I"])))
@@ -21,3 +21,10 @@
     (is (= "Abc" (get-prefix-combinator "Abcxyz" ["Abc"])))
     ))
 
+(deftest test-calc-clcode
+  (testing "正常系"
+    (is (= "xz(yz)" (calc-clcode "Sxyz" [{:combinator "S"
+                                          :args-count 3
+                                          :format "{0}{2}({1}{2})"}
+                                         ])))
+    ))
