@@ -34,10 +34,33 @@
         (get-prefix-bracket-combinator clcode)
         (-> clcode first str)))))
 
+(defn parse-combinators
+  "CLCodeをコンビネータのリストに変換する"
+  [clcode combinators]
+  (loop [c clcode
+         ret []]
+    (if (empty? c)
+      ret
+      (let [pc (get-prefix-combinator c combinators)]
+        (recur (-> pc
+                   count
+                   (drop c)
+                   str/join)
+               (conj ret pc))))))
+
 (defn calc-clcode
   "CLCodeを計算する"
   [clcode combinators]
-  "xz(yz)")
+  (let [m (filter #(str/starts-with? clcode %)
+                  (map :combinator combinators))]
+    (if (not (= (count m) 0))
+      (let [c (first combinators)]
+        (-> c
+            count
+            (drop clcode))
+        )
+      nil)
+    ))
 
 (defn -main
   "main func"
