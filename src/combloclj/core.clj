@@ -11,14 +11,6 @@
   [clcode]
   (println clcode))
 
-(defn get-prefix-combinator
-  "先頭のコンビネータを取得する"
-  [clcode combinators]
-  (let [m (filter #(str/starts-with? clcode %) combinators)]
-    (if (= (count m) 0)
-      (first clcode)
-      (first m))))
-
 (defn get-prefix-bracket-combinator
   "先頭の、括弧でくくられた文字列を返す"
   [text]
@@ -41,6 +33,16 @@
                    (inc i)
                    depth)
       )))
+
+(defn get-prefix-combinator
+  "先頭のコンビネータを取得する"
+  [clcode combinators]
+  (let [m (filter #(str/starts-with? clcode %) combinators)]
+    (if (not (= (count m) 0))
+      (first m)
+      (if (= \( (first clcode))
+        (get-prefix-bracket-combinator clcode)
+        (-> clcode first str)))))
 
 (defn -main
   "main func"

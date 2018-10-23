@@ -5,8 +5,8 @@
 (deftest get-prefix-combinator-test
   (testing "正常系"
     (is (= "S" (get-prefix-combinator "Sxyz" ["S" "K" "I"])))
-    (is (= \Z (get-prefix-combinator "Zxyz" ["S" "K" "I"])))
-    ; (is (= "(abc)" (get-prefix-combinator "(abc)xyz" ["S" "K" "I"])))
+    (is (= "(ABC)" (get-prefix-combinator "(ABC)XYZ" ["S" "K" "I"])))
+    (is (= "Z" (get-prefix-combinator "Zxyz" ["S" "K" "I"])))
     ))
 
 (deftest get-prefix-bracket-combinator-test
