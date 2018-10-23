@@ -33,7 +33,7 @@
                               (inc depth))
       (= \) (first t)) (let [d (dec depth)]
                          (if (= 0 d)
-                           (apply str (take (inc i) text))
+                           (str/join (take (inc i) text))
                            (recur (rest t)
                                   (inc i)
                                   d)))
