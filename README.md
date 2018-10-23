@@ -2,15 +2,42 @@
 
 [![Build Status](https://travis-ci.org/jiro4989/comblo.svg?branch=master)](https://travis-ci.org/jiro4989/comblo)
 
-A Clojure library designed to ... well, that part is up to you.
+CombinatorLogicのClojure実装
 
-## Usage
+## CombinatorLogicとは
 
-FIXME
+CombinatorLogic(コンビネータ論理)はコンビネータを引数にとるコンビネータのみで計
+算を行う論理。主要なコンビネータとしてS,K,Iコンビネータが存在する。
 
-## License
+### Sコンビネータ
 
-Copyright © 2018 FIXME
+3つの引数をとり、それぞれ以下のようにコンビネータを並べ替える。
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+```
+Sxyz -> xz(yz)
+```
+
+### Kコンビネータ
+
+2つの引数をとり、1つ目の引数を返す。
+
+```
+Kxy -> x
+```
+
+### Iコンビネータ
+
+1つの引数をとり、1つ目の引数を返す。
+
+```
+Ix -> x
+```
+
+### 計算例
+
+上記のコンビネータを組み合わせた計算例を以下に示す。
+
+```
+SKIIx -> KI(II)x -> Ix -> x
+```
+
