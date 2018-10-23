@@ -1,11 +1,6 @@
 (ns combloclj.core
   (:require [clojure.string :as str]))
 
-(defn parse-clcode
-  "CLCodeを解析し、nodeのリストとして返却する"
-  [clcode]
-  (println clcode))
-
 (defn get-prefix-bracket-combinator
   "先頭の、括弧でくくられた文字列を返す"
   [text]
