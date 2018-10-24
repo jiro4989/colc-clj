@@ -63,10 +63,21 @@
 
     ))
 
-;;(deftest test-calc-clcode
-;;  (testing "正常系"
-;;    (is (= "xz(yz)" (calc-clcode "Sxyz" [{:combinator "S"
-;;                                          :args-count 3
-;;                                          :format "{0}{2}({1}{2})"}
-;;                                         ])))
-;;    ))
+(deftest test-replace-template
+  (testing "replace-templateは"
+    (testing "Sコンビネータ"
+      (is (= "KI(II)" (replace-template ["S" "K" "I" "I"] cs))))
+
+    (testing "Kコンビネータ"
+      (is (= "I" (replace-template ["K" "I" "I"] cs))))
+
+    (testing "Iコンビネータ"
+      (is (= "I" (replace-template ["I" "I"] cs))))
+
+    (testing "定義済みコンビネータが存在しない場合は計算対象をそのまま結合して返す"
+      (is (= "xyz" (replace-template ["x" "y" "z"] cs))))
+
+    (testing "処理対象がない空の場合はnilを返す"
+      (is (= nil (replace-template [] cs))))
+
+    ))
