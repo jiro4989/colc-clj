@@ -54,13 +54,13 @@
   [cs combinators]
   (cond
     (empty? cs) nil
-    (empty? combinators) nil
+    (empty? combinators) (str/join cs)
     :else (let [cb (->> combinators
                         (filter #(= (:combinator %) (first cs)))
                         first)]
             (if (empty? cb)
               (str/join cs)
-              (if (< (count cs) (:args-count cb))
+              (if (< (-> cs rest count) (:args-count cb))
                 (str/join cs)
                 (loop [s (map-indexed vector (rest cs))
                        ret (:format cb)]
@@ -77,17 +77,12 @@
   "CLCodeを計算する"
   [^String clcode
    combinators]
-  (let [m (filter #(str/starts-with? clcode %)
-                  (map :combinator combinators))]
-    (if (not (= (count m) 0))
-      (let [c (first combinators)]
-        (-> c
-            count
-            (drop clcode)
-            parse-combinators)
-        )
-      nil)
-    ))
+  (loop [c clcode]
+    (let [d (replace-template (parse-combinators c combinators)
+                              combinators)]
+      (if (= c d)
+        c
+        (recur d)))))
 
 (defn -main
   "main func"
