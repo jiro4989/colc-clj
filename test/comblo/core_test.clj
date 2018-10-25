@@ -74,6 +74,9 @@
     (testing "Iコンビネータ"
       (is (= "I" (replace-template ["I" "I"] cs))))
 
+    (testing "引数不足の場合はそのまま結合して返す"
+      (is (= "SKI" (replace-template ["S" "K" "I"] cs))))
+
     (testing "定義済みコンビネータが存在しない場合は計算対象をそのまま結合して返す"
       (is (= "xyz" (replace-template ["x" "y" "z"] cs))))
 

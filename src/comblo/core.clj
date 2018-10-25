@@ -52,18 +52,26 @@
 (defn replace-template
   "CLCodeテンプレート文字列を置換する"
   [cs combinators]
-  (loop [s (map-indexed vector (rest cs))
-         ret (->> combinators
-                  (filter #(= (:combinator %) (first cs)))
-                  first
-                  :format)]
-    (cond
-      (empty? s) ret
-      (empty? ret) (str/join cs)
-      :else (recur (rest s)
-                   (str/replace ret
-                                (format "{%d}" (-> s first first))
-                                (-> s first second))))))
+  (cond
+    (empty? cs) nil
+    (empty? combinators) nil
+    :else (let [cb (->> combinators
+                        (filter #(= (:combinator %) (first cs)))
+                        first)]
+            (if (empty? cb)
+              (str/join cs)
+              (if (< (count cs) (:args-count cb))
+                (str/join cs)
+                (loop [s (map-indexed vector (rest cs))
+                       ret (:format cb)]
+                  (cond
+                    (empty? s) ret
+                    (empty? ret) (str/join cs)
+                    :else (recur (rest s)
+                                 (str/replace ret
+                                              (format "{%d}" (-> s first first))
+                                              (-> s first second)))))))))
+  )
 
 (defn calc-clcode
   "CLCodeを計算する"
