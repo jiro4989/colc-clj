@@ -1,9 +1,9 @@
 (ns comblo.core
   (:require [clojure.string :as str]))
 
-(defn get-prefix-bracket-combinator
+(defn ^String get-prefix-bracket-combinator
   "先頭の、括弧でくくられた文字列を返す"
-  [text]
+  [^String text]
   (loop [^String t text
          i (int 0)
          depth (int 0)]
@@ -24,7 +24,7 @@
                    depth)
       )))
 
-(defn get-prefix-combinator
+(defn ^String get-prefix-combinator
   "先頭のコンビネータを取得する"
   [^String clcode
    combinators]
@@ -37,7 +37,8 @@
 
 (defn parse-combinators
   "CLCodeをコンビネータのリストに変換する"
-  [clcode combinators]
+  [^String clcode
+   combinators]
   (loop [^String c clcode
          ret []]
     (if (empty? c)
@@ -49,7 +50,7 @@
                    str/join)
                (conj ret pc))))))
 
-(defn replace-template
+(defn ^String replace-template
   "CLCodeテンプレート文字列を置換する"
   [cs combinators]
   (cond
