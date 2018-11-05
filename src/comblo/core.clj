@@ -74,16 +74,15 @@
                                               (-> s first second)))))))))
   )
 
-(defn calc-clcode
-  "CLCodeを計算する"
-  [^String clcode
-   combinators]
-  (loop [c clcode]
-    (let [d (replace-template (parse-combinators c combinators)
-                              combinators)]
-      (if (= c d)
-        c
-        (recur d)))))
+; (defn calc-clcode
+;   "CLCodeを計算する"
+;   [clcode combinators]
+;   (loop [c clcode]
+;     (let [d (replace-template (parse-combinators c combinators)
+;                               combinators)]
+;       (if (= c d)
+;         c
+;         (recur d)))))
 
 (defn -main
   "main func"

@@ -85,21 +85,21 @@
 
     ))
 
-(deftest test-calc-clcode
-  (testing "calc-clcodeは"
-    (testing "正常系"
-      (is (= "x" (calc-clcode "SKIx" cs))))
-
-    (testing "コンビネータ未定義の場合はそのまま返す"
-      (is (= "SKIx" (calc-clcode "SKIx" []))))
-
-    (testing "途中で計算が止まる"
-      (is (= "xx(xx)" (calc-clcode "Sxxx" cs))))
-
-    (testing "引数がなかったらそのまま返す"
-      (is (= "I" (calc-clcode "I" cs))))
-
-    (testing "空文字のときはnilを返す"
-      (is (= nil (calc-clcode "" cs))))
-
-    ))
+; (deftest test-calc-clcode
+;   (testing "calc-clcodeは"
+;     (testing "正常系"
+;       (is (= "x" (calc-clcode "SKIx" cs))))
+;
+;     (testing "コンビネータ未定義の場合はそのまま返す"
+;       (is (= "SKIx" (calc-clcode "SKIx" []))))
+;
+;     (testing "途中で計算が止まる"
+;       (is (= "xx(xx)" (calc-clcode "Sxxx" cs))))
+;
+;     (testing "引数がなかったらそのまま返す"
+;       (is (= "I" (calc-clcode "I" cs))))
+;
+;     (testing "空文字のときはnilを返す"
+;       (is (= nil (calc-clcode "" cs))))
+;
+;     ))
