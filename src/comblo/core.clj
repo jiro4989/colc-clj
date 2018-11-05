@@ -28,7 +28,7 @@
   "先頭のコンビネータを取得する"
   [^String clcode
    combinators]
-  (let [m (filter #(str/starts-with? clcode %) combinators)]
+  (let [m (filter #(str/starts-with? clcode %) (map :combinator combinators))]
     (if-not (zero? (count m))
       (first m)
       (if (= \( (first clcode))

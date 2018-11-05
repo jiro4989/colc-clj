@@ -7,7 +7,6 @@
          {:combinator "K" :args-count 2 :format "{0}"}
          {:combinator "I" :args-count 1 :format "{0}"}
          ])
-(def cns (map :combinator cs))
 
 (deftest test-get-prefix-bracket-combinator
   (testing "get-prefix-bracket-combinatorは"
@@ -34,32 +33,32 @@
 (deftest test-get-prefix-combinator
   (testing "get-prefix-combinatorは"
     (testing "先頭のコンビネータを返す"
-      (is (= "S" (get-prefix-combinator "Sxyz" ["S" "K" "I"]))))
+      (is (= "S" (get-prefix-combinator "Sxyz" cs))))
 
     (testing "先頭の括弧で括られたコンビネータを返す"
-      (is (= "(ABC)" (get-prefix-combinator "(ABC)XYZ" ["S" "K" "I"]))))
+      (is (= "(ABC)" (get-prefix-combinator "(ABC)XYZ" cs))))
 
     (testing "定義済みコンビネータに含まれない文字列の場合は、先頭1文字を返す"
-      (is (= "x" (get-prefix-combinator "xyz" ["S" "K" "I"]))))
+      (is (= "x" (get-prefix-combinator "xyz" cs))))
 
     (testing "定義済みコンビネータが空の場合は先頭1文字を返す"
       (is (= "Z" (get-prefix-combinator "Zxyz" []))))
 
     (testing "正義済みコンビネータには複数文字を指定できる"
-      (is (= "Abc" (get-prefix-combinator "Abcxyz" ["Abc"]))))
+      (is (= "Abc" (get-prefix-combinator "Abcxyz" [{:combinator "Abc" :args-count 1 :format "{0}"}]))))
 
     ))
 
 (deftest test-parse-combinators
   (testing "parse-combinatorsは"
     (testing "文字列をコンビネータのベクタに変換する"
-      (is (= ["S" "x" "y" "z"] (parse-combinators "Sxyz" cns))))
+      (is (= ["S" "x" "y" "z"] (parse-combinators "Sxyz" cs))))
 
     (testing "括弧で括られた文字列をコンビネータとして扱う"
-      (is (= ["(abc)" "(def)" "S"] (parse-combinators "(abc)(def)S" cns))))
+      (is (= ["(abc)" "(def)" "S"] (parse-combinators "(abc)(def)S" cs))))
 
     (testing "空文字列が渡されたとき、空ベクタを返す"
-      (is (= [] (parse-combinators "" cns))))
+      (is (= [] (parse-combinators "" cs))))
 
     ))
 
