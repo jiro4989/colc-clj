@@ -9,12 +9,12 @@
          depth (int 0)]
     (cond
       (empty? t) nil
-      (< depth 0) nil
+      (neg? depth) nil
       (= \( (first t)) (recur (rest t)
                               (inc i)
                               (inc depth))
       (= \) (first t)) (let [d (dec depth)]
-                         (if (= 0 d)
+                         (if (zero? d)
                            (str/join (take (inc i) text))
                            (recur (rest t)
                                   (inc i)
@@ -29,7 +29,7 @@
   [^String clcode
    combinators]
   (let [m (filter #(str/starts-with? clcode %) combinators)]
-    (if (not (= (count m) 0))
+    (if-not (zero? (count m))
       (first m)
       (if (= \( (first clcode))
         (get-prefix-bracket-combinator clcode)
