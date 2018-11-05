@@ -74,6 +74,20 @@
                                               (-> s first second)))))))))
   )
 
+(defn ^String calc-clcode1
+  "CLCodeを1ステップ計算する"
+  [comb args]
+  (if (< (count args) (:args-count comb))
+    (str/join (cons (:combinator comb) args))
+    (loop [s (map-indexed vector args)
+           ret (:format comb)]
+      (cond
+        (empty? s) ret
+        :else (recur (rest s)
+                     (str/replace ret
+                                  (format "{%d}" (-> s first first))
+                                  (-> s first second)))))))
+
 ; (defn calc-clcode
 ;   "CLCodeを計算する"
 ;   [clcode combinators]

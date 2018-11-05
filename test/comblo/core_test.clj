@@ -8,6 +8,8 @@
          {:combinator "I" :args-count 1 :format "{0}"}
          ])
 
+(def s-comb {:combinator "S" :args-count 3 :format "{0}{2}({1}{2})"})
+
 (deftest test-get-prefix-bracket-combinator
   (testing "get-prefix-bracket-combinatorは"
     (testing "先頭の括弧でくくられた文字列を返す"
@@ -82,6 +84,15 @@
     (testing "処理対象がない空の場合はnilを返す"
       (is (= nil (replace-template [] cs))))
 
+    ))
+
+(deftest test-calc-clcode1
+  (testing "calc-clcode1は"
+    (testing "正常に計算できる場合は文字列を返す"
+      (is (= "xz(yz)" (calc-clcode1 s-comb ["x" "y" "z"]))))
+
+    (testing "引数不足の場合は計算せずに返す"
+      (is (= "Sxy" (calc-clcode1 s-comb ["x" "y"]))))
     ))
 
 ; (deftest test-calc-clcode
